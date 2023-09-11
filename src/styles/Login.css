@@ -1,0 +1,38 @@
+.container{
+    background:white;
+    border-radius:10px;
+    height:90vh;
+    width:90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+.img-box{
+    width:55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height:100%;
+}
+.img-box h1{
+    top:5%;
+    left:10%;
+    position:absolute;
+}
+.img-box img{
+    width:90%;
+}
+.login-box{
+    width:45%;
+    text-align: left;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.breadcrumb{
+    text-align: center !important;
+}
