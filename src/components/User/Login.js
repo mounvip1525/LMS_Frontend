@@ -1,12 +1,14 @@
 import React from 'react'
 import '../../styles/Login.css'
 import { Form, Button } from 'react-bootstrap'
+import loginLogo from './../../images/Login.png'
+
 export default function UserLogin() {
     return (
         <div className='container'>
             <div className='img-box'>
                 <h1>&lt; / &gt; LUMA Loans</h1>
-                <img src="login.png" alt="login" />
+                <img src={loginLogo} alt="login" />
             </div>
             <div className='login-box'>
                 <h2 className='mb-3'>User Login</h2>
@@ -26,7 +28,7 @@ export default function UserLogin() {
                         Submit
                     </Button>
                     <div style={{ textAlign: "center" }}>
-                        <span>Admin Login Link: </span><a href="/adminLogin">Here</a>
+                        <span>Admin Login Link: </span><a href="/admin/login">Here</a>
                     </div>
                 </div>
             </div>

@@ -10,9 +10,16 @@ import {
   faStore,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 export default function AdminSidebar({activeLink}) {
+  const navigate = useNavigate();
+
+  function logout() {
+    navigate("/admin/login", {replace: true})
+  }
+
   return (
     <div className="sidebar">
       <div>
@@ -58,7 +65,7 @@ export default function AdminSidebar({activeLink}) {
             </div>
           </div>
         </div>
-        <Button variant="primary" style={{ width: "100%" }}>
+        <Button variant="primary" style={{ width: "100%" }} onClick={logout}>
           Logout <FontAwesomeIcon icon={faRightFromBracket} />
         </Button>
       </div>
