@@ -26,7 +26,7 @@ export default function AdminLogin() {
                         Submit
                     </Button>
                     <div style={{textAlign:"center"}}>
-                        <span>Not an admin?</span><a href="/userLogin">User Login</a>
+                        <span>Not an admin?</span><a href="/user/login">User Login</a>
                     </div>
                 </div>
             </div>

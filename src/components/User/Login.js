@@ -3,7 +3,7 @@ import '../../styles/Login.css'
 import { Form, Button } from 'react-bootstrap'
 export default function UserLogin() {
     return (
-        <div className='login-container'>
+        <div className='container'>
             <div className='img-box'>
                 <h1>&lt; / &gt; LUMA Loans</h1>
                 <img src="login.png" alt="login" />
