@@ -5,11 +5,13 @@ import { SERVER_URL } from '../../config';
 import { Url } from '../../Url';
 import { useNavigate } from 'react-router-dom';
 import loginLogo from './../../images/Login.png'
+import { useAuth } from '../../context/AuthContext';
 
 export default function AdminLogin() {
     const [userName, setUserName] = useState("");
     const [userPwd, setUserPwd] = useState("");
     const [alert, setAlert] = useState(false);
+    const { login } = useAuth();
     const navigate = useNavigate();
 
     const onSubmitLogin = async () => {
@@ -34,6 +36,7 @@ export default function AdminLogin() {
         })
         .then((data) => {
             if(data) {
+                login(data);
                 navigate("/admin/home", {replace: true})
             }
         })
@@ -64,7 +67,7 @@ export default function AdminLogin() {
                         onChange={(e) => (setUserPwd(e.target.value))}
                     />
                     { alert ? 
-                        <div class="alert alert-danger" role="alert">
+                        <div className="alert alert-danger" role="alert">
                             Username or Password is Incorrect!!!
                         </div> : <></>
                     }

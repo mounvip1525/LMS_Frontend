@@ -11,28 +11,31 @@ import ItemsMaster from "./components/Admin/Item/ItemsMaster";
 import ApplyLoan from "./components/User/ApplyLoan";
 import ViewLoans from "./components/User/ViewLoans";
 import ItemsPurchased from "./components/User/ItemsPurchased";
+import { useAuth } from "./context/AuthContext";
 
 const App = () => {
+  const { user } = useAuth();
   return (
     <div className="app">
       <Router>
         <Routes>
-          <Route path="/user/login" element={<UserLogin />} />
-          <Route path="/user/home" element={<ApplyLoan />} />
-          <Route path="/user/loan/apply" element={<ApplyLoan />} />
-          <Route path="/user/loan/all" element={<ViewLoans />} />
-          <Route path="/user/item/all" element={<ItemsPurchased />} />
+          {/* (user && user.role === "Admin") ? <LoanData /> : <AdminLogin />  */}
+          <Route path="/user/login" element={(user && user.role === "User") ? <ApplyLoan/> : <UserLogin />} />
+          <Route path="/user/home" element={(user && user.role === "User") ? <ApplyLoan/> : <UserLogin />} />
+          <Route path="/user/loan/apply" element={(user && user.role === "User") ? <ApplyLoan/> : <UserLogin />} />
+          <Route path="/user/loan/all" element={(user && user.role === "User") ? <ViewLoans /> : <UserLogin />} />
+          <Route path="/user/item/all" element={(user && user.role === "User") ? <ItemsPurchased /> : <UserLogin />} />
 
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/home" element={<AddCustomer />} />
-          <Route path="/admin/customer/add" element={<AddCustomer />} />
-          <Route path="/admin/customer/all" element={<CustomerData />} />
-          <Route path="/admin/loan/add" element={<AddLoan />} />
-          <Route path="/admin/loan/all" element={<LoanData />} />
-          <Route path="/admin/item/add" element={<AddItem />} />
-          <Route path="/admin/item/all" element={<ItemsMaster />} />
+          <Route path="/admin/login" element={(user && user.role === "Admin") ? <AddCustomer /> : <AdminLogin />} />
+          <Route path="/admin/home" element={(user && user.role === "Admin") ? <AddCustomer /> : <AdminLogin />} />
+          <Route path="/admin/customer/add" element={(user && user.role === "Admin") ? <AddCustomer /> : <AdminLogin />} />
+          <Route path="/admin/customer/all" element={(user && user.role === "Admin") ? <CustomerData /> : <AdminLogin />} />
+          <Route path="/admin/loan/add" element={(user && user.role === "Admin") ? <AddLoan /> : <AdminLogin />} />
+          <Route path="/admin/loan/all" element={(user && user.role === "Admin") ? <LoanData /> : <AdminLogin />} />
+          <Route path="/admin/item/add" element={(user && user.role === "Admin") ? <AddItem /> : <AdminLogin />} />
+          <Route path="/admin/item/all" element={(user && user.role === "Admin") ? <ItemsMaster /> : <AdminLogin />} />
 
-          <Route path="/" element={<UserLogin />} />
+          <Route path="/" element={(user && user.role === "User") ? <ApplyLoan/> : <UserLogin />} />
         </Routes>
       </Router>
     </div>

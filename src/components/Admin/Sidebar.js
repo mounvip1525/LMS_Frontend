@@ -11,12 +11,15 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 
 export default function AdminSidebar({activeLink}) {
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
-  function logout() {
+  function onLogout() {
+    logout();
     navigate("/admin/login", {replace: true})
   }
 
@@ -65,7 +68,7 @@ export default function AdminSidebar({activeLink}) {
             </div>
           </div>
         </div>
-        <Button variant="outline-primary" style={{ width: "100%" }} onClick={logout}>
+        <Button variant="outline-primary" style={{ width: "100%" }} onClick={onLogout}>
           Logout <FontAwesomeIcon icon={faRightFromBracket} />
         </Button>
       </div>
