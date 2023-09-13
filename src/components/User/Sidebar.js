@@ -43,7 +43,7 @@ export default function UserSidebar({activeLink}) {
           </div>
 
         </div>
-        <Button variant="primary" style={{ width: "100%" }}>
+        <Button variant="outline-primary" style={{ width: "100%" }}>
           Logout <FontAwesomeIcon icon={faRightFromBracket} />
         </Button>
       </div>

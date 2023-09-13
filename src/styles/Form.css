@@ -1,0 +1,26 @@
+.formBox{
+    width:75%;
+    text-align:left;
+    height:100%;
+    padding:4% 5%;
+}
+.tableBox{
+    padding:4% 10px;
+}
+.tableBox h2, .tableBox p{
+    padding-left:5%;
+}
+.formBox form >div{
+    display:flex;
+}
+.formBox form> div div{
+    margin-right:2%;
+    width:50%;
+}
+.formBox form> div div div{
+    width:100%
+}
+.formBox button{
+    float:right;
+    width:30%;
+}

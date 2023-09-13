@@ -65,7 +65,7 @@ export default function AdminSidebar({activeLink}) {
             </div>
           </div>
         </div>
-        <Button variant="primary" style={{ width: "100%" }} onClick={logout}>
+        <Button variant="outline-primary" style={{ width: "100%" }} onClick={logout}>
           Logout <FontAwesomeIcon icon={faRightFromBracket} />
         </Button>
       </div>

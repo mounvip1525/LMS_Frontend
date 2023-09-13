@@ -1,10 +1,13 @@
 .sidebar{
     width:25%;
     height:100%;
-    border-right:0.25px solid grey;
+    /* border-right:0.25px solid grey; */
     display:flex;
     justify-content: center;
     align-items: center;
+    padding:0 2%;
+    background:#f3f3f3;
+    border-radius:10px 0 0 10px;
 }
 .sidebar>div{
         display:flex;
@@ -23,7 +26,7 @@
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     text-align:left;
-
+    background:white;
 }
 .profile-box svg{
     background:#50AED3;
@@ -50,6 +53,7 @@
  margin:2% 0;
  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
  border-left:3px solid grey;
+ background:white;
 }
 .sidebar-contents div svg{
     margin-right:3%;
