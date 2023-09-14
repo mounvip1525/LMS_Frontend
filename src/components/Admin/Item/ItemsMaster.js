@@ -17,15 +17,10 @@ export default function ItemsMaster() {
   const [items, setItems] = useState([]);
 
   useEffect (() => {
-    // let data = []
     fetch(SERVER_URL + Url.GET_ITEMS)
     .then((response) => response.json())
     .then((itemsData) => setItems(itemsData))
-    // .then((response) => console.log(response))
-    // .then((itemsData) => {data = itemsData})
-    .catch((err) => console.log("Error in fetching items!!! " + err.message))
-
-    // setItems(data)
+    .catch((err) => console.log("Error in fetching items! " + err.message))
     }, []);
 
   return (

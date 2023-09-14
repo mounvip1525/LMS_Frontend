@@ -22,7 +22,6 @@ export default function AddItem() {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
 
     await fetch(SERVER_URL + Url.ADD_ITEM, {
       method: "POST",
@@ -44,7 +43,7 @@ export default function AddItem() {
             setAlert(false)
           }, 5000);
         } else {
-          setAlertMessage("Item was NOT Added !!!!!!");
+          setAlertMessage("Item was not added!");
           setTimeout(() => {}, 100);
           setAlert(true);
           setErr(true);
