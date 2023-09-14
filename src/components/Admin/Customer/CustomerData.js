@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "../../../styles/Home.css";
 import "../../../styles/Form.css";
 import AdminSidebar from "../Sidebar";
+import { SERVER_URL } from "../../../config";
+import { Url } from "../../../Url";
 import { Table, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,6 +13,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function CustomerData() {
+
+  const [customers, setCustomers] = useState([]);
+
+  useEffect (() => {
+    fetch(SERVER_URL + Url.GET_CUSTOMERS)
+    .then((response) => response.json())
+    .then((customersData) => setCustomers(customersData))
+    .catch((err) => console.log("Error in fetching customers! " + err.message))
+    }, []);
+
   return (
     <div className="container ">
       <AdminSidebar activeLink="allCustomers" />
@@ -31,15 +43,15 @@ export default function CustomerData() {
             </tr>
           </thead>
           <tbody>
-            {Array.from({ length: 12 }).map((_, index) => (
+          {customers && customers.map((customer) => (
               <tr>
-                <td>E0001</td>
-                <td>Mounvi Podapati</td>
-                <td>Executive</td>
-                <td>Technology</td>
-                <td>Female</td>
-                <td>2001-10-15</td>
-                <td>2001-10-15</td>
+                <td>{customer.employeeId}</td>
+                <td>{customer.employeeName}</td>
+                <td>{customer.designation}</td>
+                <td>{customer.department}</td>
+                <td>{customer.gender}</td>
+                <td>{customer.dateOfBirth}</td>
+                <td>{customer.dateOfJoining}</td>
                 <td>
                   <FontAwesomeIcon
                     icon={faTrash}
