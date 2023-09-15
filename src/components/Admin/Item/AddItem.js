@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "../../../styles/Home.css";
 import "../../../styles/Form.css";
 import AdminSidebar from "../Sidebar";
@@ -19,6 +20,23 @@ export default function AddItem() {
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [err, setErr] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const item = location.state;
+
+    if(item)
+    {
+      setFormData({
+        itemId: item.itemId,
+        itemCategory: item.itemCategory,
+        itemDescription: item.itemDescription,
+        itemMake: item.itemMake,
+        itemValuation: item.itemValuation,
+        issueStatus: item.issueStatus
+      })
+    }
+  },[]);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -48,6 +66,15 @@ export default function AddItem() {
           setAlert(true);
           setErr(true);
         }
+      });
+      setFormData({
+        itemId: "",
+        itemCategory: "Electronics",
+        itemDescription: "",
+        itemMake: "",
+        itemValuation: "",
+        issueStatus: "Y"
+    
       });
   };
 

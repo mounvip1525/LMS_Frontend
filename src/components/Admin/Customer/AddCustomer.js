@@ -5,6 +5,8 @@ import AdminSidebar from "../Sidebar";
 import { Form, Button } from "react-bootstrap";
 import { SERVER_URL } from "../../../config";
 import { Url } from "../../../Url";
+import {useLocation} from "react-router-dom";
+import { useEffect } from "react";
 
 export default function AddCustomer() {
   const [formData, setFormData] = useState({
@@ -19,6 +21,25 @@ export default function AddCustomer() {
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [err, setErr] = useState(false);
+  const location = useLocation();
+
+
+  useEffect(() => {
+    const customer = location.state;
+
+    if(customer)
+    {
+      setFormData({
+        employeeId: customer.employeeId,
+        employeeName: customer.employeeName,
+        department: customer.department,
+        gender: customer.gender,
+        designation: customer.designation,
+        dateOfBirth: customer.dateOfBirth,
+        dateOfJoining: customer.dateOfJoining,
+      })
+    }
+  },[]);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -49,6 +70,15 @@ export default function AddCustomer() {
           setAlert(true);
           setErr(true);
         }
+      });
+      setFormData({
+        employeeId: "",
+        employeeName: "",
+        department: "Technology",
+        gender: "Other",
+        designation: "Associate",
+        dateOfBirth: "",
+        dateOfJoining: "",
       });
   };
 

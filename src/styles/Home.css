@@ -76,3 +76,7 @@
 .highlight a{
     color:#055f83 !important;
 }
+
+.hand-icon:hover {
+    cursor: pointer
+}

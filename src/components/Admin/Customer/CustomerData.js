@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import "../../../styles/Home.css";
 import "../../../styles/Form.css";
 import AdminSidebar from "../Sidebar";
@@ -15,13 +16,75 @@ import {
 export default function CustomerData() {
 
   const [customers, setCustomers] = useState([]);
+  const [update, setUpdate] = useState(false);
+  const [alert,setAlert] = useState(false);
+  const [alertMessage,setAlertMessage] = useState("");
+  const [err,setErr] = useState(false);
+  const navigate = useNavigate();
 
-  useEffect (() => {
+  useEffect(() => {
     fetch(SERVER_URL + Url.GET_CUSTOMERS)
-    .then((response) => response.json())
-    .then((customersData) => setCustomers(customersData))
-    .catch((err) => console.log("Error in fetching customers! " + err.message))
-    }, []);
+      .then((response) => response.json())
+      .then((customersData) => setCustomers(customersData))
+      .catch((err) => console.log("Error in fetching customers! " + err.message))
+  }, [update])
+
+  const handleDelete = async (e, customer) => {
+    e.preventDefault();
+
+    await fetch(SERVER_URL + Url.DELETE_CUSTOMER, {
+      method: "POST",
+      body: customer.employeeId,
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          setUpdate((bool) => !bool);
+          return response.text();
+        }
+      }
+      )
+      .then((data) => {
+        if (data != null) {
+          setAlertMessage(data);
+          setAlert(true);
+          setTimeout(() => {
+            setAlert(false)
+          }, 5000);
+        } else {
+          setAlertMessage("Employee was not deleted!");
+          setAlert(true);
+          setErr(true);
+          setTimeout(() => {
+            setAlert(false);
+            setErr(false);
+          }, 5000);
+        }
+      })
+  };
+
+  const handleEdit = async (e, customer) => {
+    e.preventDefault();
+
+    await fetch(SERVER_URL + Url.DELETE_CUSTOMER, {
+      method: "POST",
+      body: customer.employeeId,
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      }
+    })
+    .then((response) => {
+      if(response.ok)
+      {
+        setUpdate((bool) => !bool);
+        return response.text();
+      }
+    })
+
+    navigate("/admin/customer/add", {replace: true, state: customer});
+  };
 
   return (
     <div className="container ">
@@ -29,6 +92,14 @@ export default function CustomerData() {
       <div className="formBox tableBox">
         <h2 className="mb-0">Customer Data</h2>
         <p style={{ color: "grey" }}>View, edit and delete customers here</p>
+        {alert && (
+          <div
+            className={err ? "alert alert-danger" : "alert alert-success"}
+            role="alert"
+          >
+            {alertMessage}
+          </div>
+        )}
         <Table responsive striped="columns" bordered size="sm" className="mb-3">
           <thead>
             <tr>
@@ -43,7 +114,7 @@ export default function CustomerData() {
             </tr>
           </thead>
           <tbody>
-          {customers && customers.map((customer) => (
+            {customers && customers.map((customer) => (
               <tr>
                 <td>{customer.employeeId}</td>
                 <td>{customer.employeeName}</td>
@@ -55,9 +126,15 @@ export default function CustomerData() {
                 <td>
                   <FontAwesomeIcon
                     icon={faTrash}
+                    className="hand-icon"
                     style={{ marginRight: "4px" }}
+                    onClick={(e) => handleDelete(e, customer)}
                   />
-                  <FontAwesomeIcon icon={faEdit} />
+                  <FontAwesomeIcon 
+                    icon={faEdit} 
+                    className="hand-icon"
+                    onClick={(e) => handleEdit(e, customer)}
+                  />
                 </td>
               </tr>
             ))}

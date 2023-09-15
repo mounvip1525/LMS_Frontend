@@ -46,6 +46,11 @@ export default function AddLoan() {
           setErr(true);
         }
       });
+      setFormData({
+        loanId: "",
+        loanType: "Electronics",
+        loanDurationYrs: ""
+      });
   };
 
   const handleInputChange = (e) => {
