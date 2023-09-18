@@ -19,6 +19,7 @@ import { useAuth } from "../../context/AuthContext";
 export default function UserSidebar({activeLink}) {
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const { user } = useAuth();
 
   function onLogout() {
     logout();
@@ -30,7 +31,7 @@ export default function UserSidebar({activeLink}) {
       <div>
         <div className="profile-box">
           <FontAwesomeIcon icon={faUser} />
-          User K070653
+          Hii {user.name}!!
         </div>
 
         <div className="sidebar-contents">

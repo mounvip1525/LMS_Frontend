@@ -1,22 +1,25 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    name:'',
-    role:''
-  });
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = sessionStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser))
+    }
+  },[])
 
   const login = (userDto) => {
     setUser(userDto);
+    sessionStorage.setItem('user', JSON.stringify(userDto))
   };
 
   const logout = () => {
-    setUser({
-        name:'',
-        role:''
-    });
+    setUser(null);
+    sessionStorage.removeItem('user');
   };
 
   return (
