@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../../styles/Home.css";
 import "../../styles/Form.css"
 import UserSidebar from "./Sidebar";
-import { useLocation } from "react-router-dom";
 import { SERVER_URL } from "../../config";
 import { Url } from "../../Url";
 import { Button, Form } from "react-bootstrap";

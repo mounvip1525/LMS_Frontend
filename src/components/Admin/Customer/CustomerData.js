@@ -5,10 +5,9 @@ import "../../../styles/Form.css";
 import AdminSidebar from "../Sidebar";
 import { SERVER_URL } from "../../../config";
 import { Url } from "../../../Url";
-import { Table, Button } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faDeleteLeft,
   faEdit,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
