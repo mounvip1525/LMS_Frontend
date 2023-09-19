@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/Home.css";
+import "../../styles/Form.css"
 import UserSidebar from "./Sidebar";
+import { useLocation } from "react-router-dom";
+import { SERVER_URL } from "../../config";
+import { Url } from "../../Url";
+import { Button, Form } from "react-bootstrap";
 
 export default function ApplyLoan() {
   const [formData, setFormData] = useState({
@@ -14,21 +19,6 @@ export default function ApplyLoan() {
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [err, setErr] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    const item = location.state;
-
-    if (item) {
-      setFormData({
-        employeeId: item.employeeId,
-        itemCategory: item.itemCategory,
-        itemDescription: item.itemDescription,
-        itemMake: item.itemMake,
-        itemValue: item.itemValue,
-      });
-    }
-  }, []);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -58,13 +48,6 @@ export default function ApplyLoan() {
           setErr(true);
         }
       });
-    setFormData({
-      employeeId: item.employeeId,
-      itemCategory: item.itemCategory,
-      itemDescription: item.itemDescription,
-      itemMake: item.itemMake,
-      itemValue: item.itemValue,
-    });
   };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -77,9 +60,9 @@ export default function ApplyLoan() {
   return (
     <div className="container ">
       <UserSidebar activeLink="applyLoan" />
-      {/* <div>ApplyLoan</div> */}
-      <h2 className="mb-0">Add Item</h2>
-      <p style={{ color: "grey" }}>Add an item to the catalogue</p>
+      <div className="formBox">
+      <h2 className="mb-0">Apply Loan</h2>
+      <p style={{ color: "grey" }}>Apply for a Loan</p>
       {alert && (
         <div
           className={err ? "alert alert-danger" : "alert alert-success"}
@@ -92,11 +75,11 @@ export default function ApplyLoan() {
         <div>
           <div>
             <Form.Group className="mb-3">
-              <Form.Label>Item ID</Form.Label>
+              <Form.Label>Employee ID</Form.Label>
               <Form.Control
                 type="text"
-                name="itemId"
-                value={formData.itemId}
+                name="employeeId"
+                value={formData.employeeId}
                 onChange={handleInputChange}
               />
             </Form.Group>
@@ -126,6 +109,18 @@ export default function ApplyLoan() {
             </Form.Group>
 
             <Form.Group className="mb-3">
+              <Form.Label>Item Value</Form.Label>
+              <Form.Control
+                type="text"
+                name="itemValue"
+                value={formData.itemValue}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+          </div>
+
+          <div>
+            <Form.Group className="mb-3">
               <Form.Label>Item Make</Form.Label>
               <Form.Control
                 type="text"
@@ -135,22 +130,11 @@ export default function ApplyLoan() {
               />
             </Form.Group>
           </div>
-
-          <div>
-            <Form.Group className="mb-3">
-              <Form.Label>Item Valuation</Form.Label>
-              <Form.Control
-                type="number"
-                name="itemValuation"
-                value={formData.itemValuation}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-          </div>
         </div>
 
-        <Button type="submit">Add Data</Button>
+        <Button type="submit">Apply</Button>
       </Form>
+      </div>
     </div>
   );
 }

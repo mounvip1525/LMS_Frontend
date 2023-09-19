@@ -7,8 +7,8 @@ export const Url = {
     GET_ITEMS: "/admin/getAllItems",
     DELETE_ITEM: "/admin/deleteItem",
     ADD_LOANCARD: "/admin/addLoanCardDetails",
-    GET_LOANCARDS: "/admin/getAllLoanCards"
-    APPLY_LOAN: "/applyLoan",
-    GET_ITEMS_PURCHASED: "/getEmplIssues",
-    GET_EMP_LOANCARD: "/getEmployeeCard"
+    GET_LOANCARDS: "/admin/getAllLoanCards",
+    APPLY_LOAN: "/user/applyLoan",
+    GET_ITEMS_PURCHASED: "/user/getEmplIssues",
+    GET_EMP_LOANCARD: "/user/getEmployeeCard"
 }

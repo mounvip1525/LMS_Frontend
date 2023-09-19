@@ -1,18 +1,17 @@
 import React, {useState, useEffect} from "react";
-import "../../../styles/Home.css";
-import "../../../styles/Form.css";
-import AdminSidebar from "../Sidebar";
-import { SERVER_URL } from "../../../config";
-import { Url } from "../../../Url";
-import { Table, Button } from "react-bootstrap";
+import { Table } from "react-bootstrap";
+import UserSidebar from "./Sidebar";
+import { Url } from "../../Url";
+import { SERVER_URL } from "../../config";
+// Form and Home css
 
 export default function ViewLoans() {
-  const [loanCard, setLoanCard]= useState([]);
+  const [viewLoanCard, setViewLoanCard]= useState([]);
 
   useEffect (() => {
-    fetch(SERVER_URL + Url.GET_EMP_LOANCARD)
+    fetch(SERVER_URL + Url.GET_EMP_LOANCARD+"?emplId=E0001")
     .then((response) => response.json())
-    .then((loanCard) => setLoanCard(loanCard))
+    .then((loanCard) => setViewLoanCard(loanCard))
     .catch((err) => console.log("Error in fetching user Loan Cards " + err.message))
     }, []);
 
@@ -32,12 +31,12 @@ export default function ViewLoans() {
             </tr>
           </thead>
           <tbody>
-          {loanCard && loanCard.map((loanCard) => (
+          {viewLoanCard && viewLoanCard.map((data) => (
               <tr>
-                <td>{loanCard.loanId}</td>
-                <td>{loanCard.loanType}</td>
-                <td>{loanCard.duration}</td>
-                <td>{loanCard.issueDate}</td>
+                <td>{data.loanCard.loanId}</td>
+                <td>{data.loanCard.loanType}</td>
+                <td>{data.loanCard.loanDurationYrs}</td>
+                <td>{data.cardIssueDate}</td>
               </tr>
             ))}
           </tbody>
