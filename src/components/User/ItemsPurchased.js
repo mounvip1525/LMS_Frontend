@@ -1,12 +1,47 @@
-import React from "react";
-import "../../styles/Home.css";
+import React, {useState, useEffect} from "react";
+import { Table } from "react-bootstrap";
 import UserSidebar from "./Sidebar";
+import { SERVER_URL } from "../../config";
+import { Url } from "../../Url";
 
 export default function ItemsPurchased() {
+  const [itemsPurchased, setItemsPurchased]= useState([]);
+  useEffect (() => {
+    fetch(SERVER_URL + Url.GET_ITEMS_PURCHASED+"?emplId=E0001")
+    .then((response) => response.json())
+    .then((itemsPurchased) => setItemsPurchased(itemsPurchased))
+    .catch((err) => console.log("Error in fetching user Loan Cards " + err.message))
+    }, []);
+
   return (
     <div className="container ">
       <UserSidebar activeLink="itemsPurchased" />
-      <div>ItemsPurchased</div>
+      <div className="formBox tableBox">
+        <h2 className="mb-0">Items Issued</h2>
+        <p style={{ color: "grey" }}>Items Purchased</p>
+        <Table responsive striped="columns" bordered size="sm" className="mb-3">
+          <thead>
+            <tr>
+              <th>Issue ID</th>
+              <th>Item Description</th>
+              <th>Item Make</th>
+              <th>Item Category</th>
+              <th>Item Valuation</th>
+            </tr>
+          </thead>
+          <tbody>
+          {itemsPurchased && itemsPurchased.map((itemsPurchased) => (
+              <tr>
+                <td>{itemsPurchased.issueId}</td>
+                <td>{itemsPurchased.item.itemDescription}</td>
+                <td>{itemsPurchased.item.itemMake}</td>
+                <td>{itemsPurchased.item.itemCategory}</td>
+                <td>{itemsPurchased.item.itemValuation}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     </div>
   );
 }
