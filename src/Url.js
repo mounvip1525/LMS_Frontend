@@ -7,5 +7,8 @@ export const Url = {
     GET_ITEMS: "/getAllItems",
     DELETE_ITEM: "/deleteItem",
     ADD_LOANCARD: "/addLoanCardDetails",
-    GET_LOANCARDS: "/getAllLoanCards"
+    GET_LOANCARDS: "/getAllLoanCards",
+    APPLY_LOAN: "/applyLoan",
+    GET_ITEMS_PURCHASED: "/getEmplIssues",
+    GET_EMP_LOANCARD: "/getEmployeeCard"
 }
