@@ -36,11 +36,19 @@ export default function UserLogin() {
             console.log("Login Failed");
         })
         .then((data) => {
-            if(data) {
+            if(data.role === "User") {
                 login(data);
                 navigate("/user/home", {replace: true})
+            } else {
+                setUserName("")
+                setUserPwd("")
+                setAlert(true)
+                console.log("Login Failed");
             }
         })
+        .catch((err) => {
+            console.log(err)
+        }) 
     }
 
     return (

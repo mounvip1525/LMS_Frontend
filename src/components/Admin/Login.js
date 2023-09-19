@@ -35,11 +35,19 @@ export default function AdminLogin() {
             console.log("Login Failed");
         })
         .then((data) => {
-            if(data) {
+            if(data.role === "Admin") {
                 login(data);
                 navigate("/admin/home", {replace: true})
+            } else {
+                setUserName("")
+                setUserPwd("")
+                setAlert(true)
+                console.log("Login Failed");
             }
         })
+        .catch((err) => {
+            console.log(err)
+        }) 
     }
 
     return (
