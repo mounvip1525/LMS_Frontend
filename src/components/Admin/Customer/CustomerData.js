@@ -67,21 +67,20 @@ export default function CustomerData() {
   const handleEdit = async (e, customer) => {
     e.preventDefault();
 
-    await fetch(SERVER_URL + Url.DELETE_CUSTOMER, {
-      method: "POST",
-      body: customer.employeeId,
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      }
-    })
-    .then((response) => {
-      if(response.ok)
-      {
-        setUpdate((bool) => !bool);
-        return response.text();
-      }
-    })
-
+    // await fetch(SERVER_URL + Url.DELETE_CUSTOMER, {
+    //   method: "POST",
+    //   body: customer.employeeId,
+    //   headers: {
+    //     "Content-type": "application/json; charset=UTF-8",
+    //   }
+    // })
+    // .then((response) => {
+    //   if(response.ok)
+    //   {
+    //     setUpdate((bool) => !bool);
+    //     return response.text();
+    //   }
+    // })
     navigate("/admin/customer/add", {replace: true, state: customer});
   };
 

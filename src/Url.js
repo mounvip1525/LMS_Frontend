@@ -10,5 +10,7 @@ export const Url = {
     GET_LOANCARDS: "/admin/getAllLoanCards",
     APPLY_LOAN: "/user/applyLoan",
     GET_ITEMS_PURCHASED: "/user/getEmplIssues",
-    GET_EMP_LOANCARD: "/user/getEmployeeCard"
+    GET_EMP_LOANCARD: "/user/getEmployeeCard",
+    GET_ITEM_CATEGORIES: "/user/getItemCat",
+    GET_ITEM_DESCRIPTION: "/user/getItemDesc"
 }

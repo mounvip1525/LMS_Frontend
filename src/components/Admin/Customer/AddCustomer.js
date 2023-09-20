@@ -43,7 +43,6 @@ export default function AddCustomer() {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
 
     await fetch(SERVER_URL + Url.ADD_CUSTOMER, {
       method: "POST",
@@ -177,7 +176,7 @@ export default function AddCustomer() {
                 <Form.Label>Date of birth</Form.Label>
                 <Form.Control
                   type="date"
-                  placeholder="dd/mm/yyyy"
+                  placeholder="yyyy-MM-dd"
                   name="dateOfBirth"
                   value={formData.dateOfBirth}
                   onChange={handleInputChange}
@@ -188,7 +187,7 @@ export default function AddCustomer() {
                 <Form.Label>Date of Joining</Form.Label>
                 <Form.Control
                   type="date"
-                  placeholder="dd/mm/yyyy"
+                  placeholder="yyyy-MM-dd"
                   name="dateOfJoining"
                   value={formData.dateOfJoining}
                   onChange={handleInputChange}
