@@ -74,7 +74,6 @@ export default function UserLogin() {
                     <Form.Label>Username</Form.Label>
                     <Form.Control
                         id="userID"
-                        className='mb-3'
                         value={userName}
                         onChange={(e) => setUserName(e.target.value)}
                         required
@@ -88,7 +87,6 @@ export default function UserLogin() {
                     <Form.Control
                         type="password"
                         id="userPwd"
-                        className='mb-4'
                         value={userPwd}
                         onChange={(e) => (setUserPwd(e.target.value))}
                         required
@@ -102,7 +100,7 @@ export default function UserLogin() {
                             Username or Password is Incorrect!!!
                         </div> : <></>
                     }
-                    <Button variant="primary" type="submit" style={{ width: "100%" }} size="lg" className='mb-3'>
+                    <Button variant="primary" type="submit" style={{ width: "100%", marginTop: "15px" }} size="lg" className='mb-3'>
                         Submit
                     </Button>
                     </Form>
