@@ -16,7 +16,7 @@ import { useAuth } from "../../context/AuthContext";
 
 export default function AdminSidebar({activeLink}) {
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
 
   function onLogout() {
     logout();
@@ -28,7 +28,7 @@ export default function AdminSidebar({activeLink}) {
       <div>
         <div className="profile-box">
           <FontAwesomeIcon icon={faUser} />
-          Administrator
+          Admin {user.name}
         </div>
         <hr />
 

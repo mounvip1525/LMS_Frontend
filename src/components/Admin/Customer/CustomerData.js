@@ -5,10 +5,9 @@ import "../../../styles/Form.css";
 import AdminSidebar from "../Sidebar";
 import { SERVER_URL } from "../../../config";
 import { Url } from "../../../Url";
-import { Table, Button } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faDeleteLeft,
   faEdit,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
@@ -68,21 +67,20 @@ export default function CustomerData() {
   const handleEdit = async (e, customer) => {
     e.preventDefault();
 
-    await fetch(SERVER_URL + Url.DELETE_CUSTOMER, {
-      method: "POST",
-      body: customer.employeeId,
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      }
-    })
-    .then((response) => {
-      if(response.ok)
-      {
-        setUpdate((bool) => !bool);
-        return response.text();
-      }
-    })
-
+    // await fetch(SERVER_URL + Url.DELETE_CUSTOMER, {
+    //   method: "POST",
+    //   body: customer.employeeId,
+    //   headers: {
+    //     "Content-type": "application/json; charset=UTF-8",
+    //   }
+    // })
+    // .then((response) => {
+    //   if(response.ok)
+    //   {
+    //     setUpdate((bool) => !bool);
+    //     return response.text();
+    //   }
+    // })
     navigate("/admin/customer/add", {replace: true, state: customer});
   };
 
