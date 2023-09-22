@@ -41,11 +41,10 @@ export default function AddItem() {
 
   const handleOnSubmit = async (event) => {
     
-    event.preventDefault();
-    console.log(formData);
+    // event.preventDefault();
+    // console.log(formData);
 
     const form = event.currentTarget;
-        
     setValidated(true);
 
     if (form.checkValidity() === false) {
@@ -54,43 +53,45 @@ export default function AddItem() {
         console.log("in");
         return;
     }
-
-    await fetch(SERVER_URL + Url.ADD_ITEM, {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.text();
-        }
+    else
+    {
+      event.preventDefault();
+      await fetch(SERVER_URL + Url.ADD_ITEM, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
       })
-      .then((data) => {
-        if (data != null) {
-          setAlertMessage(data);
-          setAlert(true);
-          setTimeout(() => {
-            setAlert(false)
-          }, 5000);
-        } else {
-          setAlertMessage("Item was not added!");
-          setTimeout(() => {}, 100);
-          setAlert(true);
-          setValidated(false);
-          setErr(true);
-        }
-      });
-      setFormData({
-        itemId: "",
-        itemCategory: "Electronics",
-        itemDescription: "",
-        itemMake: "",
-        itemValuation: "",
-        issueStatus: "Y"
+        .then((response) => {
+          if (response.ok) {
+            return response.text();
+          }
+        })
+        .then((data) => {
+          if (data != null) {
+            setAlertMessage(data);
+            setAlert(true);
+            setTimeout(() => {
+              setAlert(false)
+            }, 5000);
+          } else {
+            setAlertMessage("Item was not added!");
+            setTimeout(() => {}, 100);
+            setAlert(true);
+            setErr(true);
+          }
+        });
+        setFormData({
+          itemId: "",
+          itemCategory: "Electronics",
+          itemDescription: "",
+          itemMake: "",
+          itemValuation: "",
+          issueStatus: "Y"
+        });
+    }
     
-      });
   };
 
   const handleInputChange = (e) => {

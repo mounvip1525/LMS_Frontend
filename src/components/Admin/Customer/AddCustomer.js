@@ -42,46 +42,60 @@ export default function AddCustomer() {
     }
   },[]);
 
-  const handleOnSubmit = async (e) => {
-    e.preventDefault();
-    console.log(formData);
+  const handleOnSubmit = async (event) => {
+    // e.preventDefault();
+    // console.log(formData);
 
-    await fetch(SERVER_URL + Url.ADD_CUSTOMER, {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.text();
-        }
+    const form = event.currentTarget;
+        
+    setValidated(true);
+
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("in");
+      return;
+    }
+    else
+    {
+      event.preventDefault();
+      await fetch(SERVER_URL + Url.ADD_CUSTOMER, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
       })
-      .then((data) => {
-        if (data != null) {
-          setAlertMessage(data);
-          setAlert(true);
-          setTimeout(() => {
-            setAlert(false)
-          }, 5000);
-        } else {
-          setAlertMessage("Employee was NOT Added !!!!!!");
-          setTimeout(() => {}, 100);
-          setAlert(true);
-          setValidated(false);
-          setErr(true);
-        }
-      });
-      setFormData({
-        employeeId: "",
-        employeeName: "",
-        department: "Technology",
-        gender: "Other",
-        designation: "Associate",
-        dateOfBirth: "",
-        dateOfJoining: "",
-      });
+        .then((response) => {
+          if (response.ok) {
+            return response.text();
+          }
+        })
+        .then((data) => {
+          if (data != null) {
+            setAlertMessage(data);
+            setAlert(true);
+            setTimeout(() => {
+              setAlert(false)
+            }, 5000);
+          } else {
+            setAlertMessage("Employee was NOT Added !!!!!!");
+            setTimeout(() => {}, 100);
+            setAlert(true);
+            setValidated(false);
+            setErr(true);
+          }
+        });
+        setFormData({
+          employeeId: "",
+          employeeName: "",
+          department: "Technology",
+          gender: "Other",
+          designation: "Associate",
+          dateOfBirth: "",
+          dateOfJoining: "",
+        });
+    }
   };
 
   const handleInputChange = (e) => {

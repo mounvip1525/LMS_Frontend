@@ -19,8 +19,8 @@ export default function AddLoan() {
   const [err, setErr] = useState(false);
 
   const handleOnSubmit = async (event) => {
-    event.preventDefault();
-    console.log(formData);
+    // event.preventDefault();
+    // console.log(formData);
 
     const form = event.currentTarget;
         
@@ -32,39 +32,41 @@ export default function AddLoan() {
         console.log("in");
         return;
     }
-
-    await fetch(SERVER_URL + Url.ADD_LOANCARD, {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.text();
-        }
+    else
+    {
+      event.preventDefault();
+      await fetch(SERVER_URL + Url.ADD_LOANCARD, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
       })
-      .then((data) => {
-        if (data != null) {
-          setAlertMessage(data);
-          setAlert(true);
-          setTimeout(() => {
-            setAlert(false)
-          }, 5000);
-        } else {
-          setAlertMessage("Loan Card was not added!");
-          setTimeout(() => {}, 100);
-          setAlert(true);
-          setValidated(false);
-          setErr(true);
-        }
-      });
-      setFormData({
-        loanId: "",
-        loanType: "Electronics",
-        loanDurationYrs: ""
-      });
+        .then((response) => {
+          if (response.ok) {
+            return response.text();
+          }
+        })
+        .then((data) => {
+          if (data != null) {
+            setAlertMessage(data);
+            setAlert(true);
+            setTimeout(() => {
+              setAlert(false)
+            }, 5000);
+          } else {
+            setAlertMessage("Loan Card was not added!");
+            setTimeout(() => {}, 100);
+            setAlert(true);
+            setErr(true);
+          }
+        });
+        setFormData({
+          loanId: "",
+          loanType: "Electronics",
+          loanDurationYrs: ""
+        });
+    }
   };
 
   const handleInputChange = (e) => {
