@@ -19,6 +19,7 @@ export default function AddItem() {
   });
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [validated,setValidated] = useState(false);
   const [err, setErr] = useState(false);
   const location = useLocation();
 
@@ -38,8 +39,21 @@ export default function AddItem() {
     }
   },[]);
 
-  const handleOnSubmit = async (e) => {
-    e.preventDefault();
+  const handleOnSubmit = async (event) => {
+    
+    event.preventDefault();
+    console.log(formData);
+
+    const form = event.currentTarget;
+        
+    setValidated(true);
+
+    if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+        console.log("in");
+        return;
+    }
 
     await fetch(SERVER_URL + Url.ADD_ITEM, {
       method: "POST",
@@ -64,6 +78,7 @@ export default function AddItem() {
           setAlertMessage("Item was not added!");
           setTimeout(() => {}, 100);
           setAlert(true);
+          setValidated(false);
           setErr(true);
         }
       });
@@ -99,17 +114,21 @@ export default function AddItem() {
             {alertMessage}
           </div>
         )}
-        <Form onSubmit={(e) => handleOnSubmit(e)}>
+        <Form noValidate validated={validated} onSubmit={(e) => handleOnSubmit(e)}>
           <div>
             <div>
               <Form.Group className="mb-3">
                 <Form.Label>Item ID</Form.Label>
                 <Form.Control
+                  required
                   type="text"
                   name="itemId"
                   value={formData.itemId}
                   onChange={handleInputChange}
                 />
+                <Form.Control.Feedback type="invalid">
+                    Please enter a valid item ID!
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group className="mb-3">
@@ -129,21 +148,29 @@ export default function AddItem() {
               <Form.Group className="mb-3">
                 <Form.Label>Item Description</Form.Label>
                 <Form.Control
+                  required
                   type="text"
                   name="itemDescription"
                   value={formData.itemDescription}
                   onChange={handleInputChange}
                 />  
+                <Form.Control.Feedback type="invalid">
+                    Please enter the item description!
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Item Make</Form.Label>
                 <Form.Control
+                  required
                   type="text"
                   name="itemMake"
                   value={formData.itemMake}
                   onChange={handleInputChange}
                 />  
+                <Form.Control.Feedback type="invalid">
+                    Please enter the item make!
+                </Form.Control.Feedback>
               </Form.Group>
 
             </div>
@@ -152,11 +179,15 @@ export default function AddItem() {
               <Form.Group className="mb-3">
                 <Form.Label>Item Valuation</Form.Label>
                 <Form.Control
+                  required
                   type="number"
                   name="itemValuation"
                   value={formData.itemValuation}
                   onChange={handleInputChange}
                 />
+                <Form.Control.Feedback type="invalid">
+                    Please enter the item valuation!
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group className="mb-3">

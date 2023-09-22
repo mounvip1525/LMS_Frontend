@@ -1,5 +1,6 @@
 export const Url = {
-    LOGIN: "/login",
+    ADMIN_LOGIN: "/admin/login",
+    USER_LOGIN: "/user/login",
     ADD_CUSTOMER: "/addEmployee",
     GET_CUSTOMERS: "/getAllEmployees",
     DELETE_CUSTOMER: "/deleteEmployee",

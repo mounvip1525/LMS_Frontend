@@ -15,10 +15,23 @@ export default function AddLoan() {
   });
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [validated,setValidated] = useState(false);
   const [err, setErr] = useState(false);
 
-  const handleOnSubmit = async (e) => {
-    e.preventDefault();
+  const handleOnSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formData);
+
+    const form = event.currentTarget;
+        
+    setValidated(true);
+
+    if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+        console.log("in");
+        return;
+    }
 
     await fetch(SERVER_URL + Url.ADD_LOANCARD, {
       method: "POST",
@@ -43,6 +56,7 @@ export default function AddLoan() {
           setAlertMessage("Loan Card was not added!");
           setTimeout(() => {}, 100);
           setAlert(true);
+          setValidated(false);
           setErr(true);
         }
       });
@@ -75,17 +89,21 @@ export default function AddLoan() {
             {alertMessage}
           </div>
         )}
-        <Form onSubmit={(e) => handleOnSubmit(e)}>
+        <Form noValidate validated={validated} onSubmit={(e) => handleOnSubmit(e)}>
           <div>
             <div>
               <Form.Group className="mb-3">
                 <Form.Label>Loan ID</Form.Label>
                 <Form.Control
+                  required
                   type="text"
                   name="loanId"
                   value={formData.loanId}
                   onChange={handleInputChange}
                 />
+                <Form.Control.Feedback type="invalid">
+                    Please enter a valid loan ID!
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group className="mb-3">
@@ -105,11 +123,15 @@ export default function AddLoan() {
               <Form.Group className="mb-3">
                 <Form.Label>Loan Duration in years</Form.Label>
                 <Form.Control
+                  required
                   type="number"
                   name="loanDurationYrs"
                   value={formData.loanDurationYrs}
                   onChange={handleInputChange}
                 />  
+                <Form.Control.Feedback type="invalid">
+                    Please enter the loan duration in years!
+                </Form.Control.Feedback>
               </Form.Group>
             </div>
           </div>
