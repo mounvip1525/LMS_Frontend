@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import '../../styles/Login.css'
-import { Form, Button, Row } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import loginLogo from './../../images/Login.png'
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
