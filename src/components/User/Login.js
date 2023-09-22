@@ -19,6 +19,7 @@ export default function UserLogin() {
         const form = e.currentTarget;
         if (form.checkValidity() === true) {
             console.log(1)
+            e.preventDefault();
             await fetch(SERVER_URL+Url.LOGIN,{
                 method: 'POST',
                 body: JSON.stringify({
@@ -46,6 +47,7 @@ export default function UserLogin() {
                     setUserName("")
                     setUserPwd("")
                     setAlert(true)
+                    setValidated(false)
                     console.log("Login Failed");
                 }
             })
@@ -74,6 +76,7 @@ export default function UserLogin() {
                     <Form.Label>Username</Form.Label>
                     <Form.Control
                         id="userID"
+                        className={validated ? "" : "mb-3"}
                         value={userName}
                         onChange={(e) => setUserName(e.target.value)}
                         required
@@ -87,6 +90,7 @@ export default function UserLogin() {
                     <Form.Control
                         type="password"
                         id="userPwd"
+                        className={validated ? "" : "mb-4"}
                         value={userPwd}
                         onChange={(e) => (setUserPwd(e.target.value))}
                         required
@@ -100,7 +104,7 @@ export default function UserLogin() {
                             Username or Password is Incorrect!!!
                         </div> : <></>
                     }
-                    <Button variant="primary" type="submit" style={{ width: "100%", marginTop: "15px" }} size="lg" className='mb-3'>
+                    <Button variant="primary" type="submit" style={{ width: "100%" }} size="lg" className='mb-3'>
                         Submit
                     </Button>
                     </Form>
