@@ -3,15 +3,17 @@ import { Table } from "react-bootstrap";
 import UserSidebar from "./Sidebar";
 import { SERVER_URL } from "../../config";
 import { Url } from "../../Url";
+import { useAuth } from "../../context/AuthContext";
 
 export default function ItemsPurchased() {
   const [itemsPurchased, setItemsPurchased]= useState([]);
+  const { user } = useAuth();
   useEffect (() => {
-    fetch(SERVER_URL + Url.GET_ITEMS_PURCHASED+"?emplId=E0001")
+    fetch(SERVER_URL + Url.GET_ITEMS_PURCHASED+"?emplId="+user.empId)
     .then((response) => response.json())
     .then((itemsPurchased) => setItemsPurchased(itemsPurchased))
     .catch((err) => console.log("Error in fetching user Loan Cards " + err.message))
-    }, []);
+    }, [user]);
 
   return (
     <div className="container ">
