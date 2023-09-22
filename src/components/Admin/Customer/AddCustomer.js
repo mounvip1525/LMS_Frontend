@@ -187,7 +187,7 @@ export default function AddCustomer() {
                 <Form.Label>Date of birth</Form.Label>
                 <Form.Control
                   type="date"
-                  placeholder="yyyy-MM-dd"
+                  placeholder="dd/mm/yyyy"
                   name="dateOfBirth"
                   value={formData.dateOfBirth}
                   onChange={handleInputChange}
@@ -198,7 +198,7 @@ export default function AddCustomer() {
                 <Form.Label>Date of Joining</Form.Label>
                 <Form.Control
                   type="date"
-                  placeholder="yyyy-MM-dd"
+                  placeholder="dd/mm/yyyy"
                   name="dateOfJoining"
                   value={formData.dateOfJoining}
                   onChange={handleInputChange}

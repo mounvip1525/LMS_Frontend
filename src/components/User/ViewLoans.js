@@ -3,15 +3,13 @@ import { Table } from "react-bootstrap";
 import UserSidebar from "./Sidebar";
 import { Url } from "../../Url";
 import { SERVER_URL } from "../../config";
-import { useAuth } from "../../context/AuthContext";
 // Form and Home css
 
 export default function ViewLoans() {
   const [viewLoanCard, setViewLoanCard]= useState([]);
-  const { user } = useAuth();
 
   useEffect (() => {
-    fetch(SERVER_URL + Url.GET_EMP_LOANCARD+"?emplId="+user.empId)
+    fetch(SERVER_URL + Url.GET_EMP_LOANCARD+"?emplId=E0001")
     .then((response) => response.json())
     .then((loanCard) => setViewLoanCard(loanCard))
     .catch((err) => console.log("Error in fetching user Loan Cards " + err.message))

@@ -16,7 +16,7 @@ import { useAuth } from "../../context/AuthContext";
 
 export default function AdminSidebar({activeLink}) {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const { logout, user } = useAuth();
 
   function onLogout() {
     logout();
