@@ -21,6 +21,8 @@ export default function ApplyLoan() {
   const [err, setErr] = useState(false);
   const [itemCat, setItemCat] = useState([]);
   const [itemDesc, setItemDesc] = useState([]);
+  const [validated,setValidated] = useState(false);
+
 
   useEffect(() => {
     fetch(SERVER_URL + Url.GET_ITEM_CATEGORIES)
@@ -30,40 +32,53 @@ export default function ApplyLoan() {
   },[])
 
   const handleOnSubmit = async (e) => {
-    e.preventDefault();
-    await fetch(SERVER_URL + Url.APPLY_LOAN, {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.text();
-        }
+    const form = e.currentTarget;
+    setValidated(true);
+
+    if (form.checkValidity() === false) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("in");
+        return;
+    }
+    else 
+    {
+      e.preventDefault();
+      await fetch(SERVER_URL + Url.APPLY_LOAN, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
       })
-      .then((data) => {
-        if (data != null) {
-          setAlertMessage(data);
-          setAlert(true);
-          setFormData({
-            employeeId: user.empId,
-            itemCategory: "",
-            itemDescription: "",
-            itemValue: "",
-            itemMake: ""
-          })
-          setTimeout(() => {
-            setAlert(false);
-          }, 5000);
-        } else {
-          setAlertMessage("Unable to apply for loan");
-          setTimeout(() => {}, 100);
-          setAlert(true);
-          setErr(true);
-        }
-      });
+        .then((response) => {
+          if (response.ok) {
+            return response.text();
+          }
+        })
+        .then((data) => {
+          if (data != null) {
+            setAlertMessage(data);
+            setAlert(true);
+          
+            setTimeout(() => {
+              setAlert(false);
+            }, 5000);
+          } else {
+            setAlertMessage("Unable to apply for loan");
+            setTimeout(() => {}, 100);
+            setAlert(true);
+            setErr(true);
+          }
+        });
+        setFormData({
+          employeeId: user.empId,
+          itemCategory: "",
+          itemDescription: "",
+          itemValue: "",
+          itemMake: ""
+        });
+    }
   };
 
   const handleInputChange = (e) => {
@@ -97,7 +112,7 @@ export default function ApplyLoan() {
           {alertMessage}
         </div>
       )}
-      <Form onSubmit={(e) => handleOnSubmit(e)}>
+      <Form noValidate validated={validated} onSubmit={(e) => handleOnSubmit(e)}>
         <div>
           <div>
             <Form.Group className="mb-3">
@@ -152,11 +167,15 @@ export default function ApplyLoan() {
             <Form.Group className="mb-3">
               <Form.Label>Item Value</Form.Label>
               <Form.Control
+                required
                 type="text"
                 name="itemValue"
                 value={formData.itemValue}
                 onChange={handleInputChange}
               />
+              <Form.Control.Feedback type="invalid">
+                    Please enter the item valuation!
+                </Form.Control.Feedback>
             </Form.Group>
           </div>
 
@@ -164,11 +183,15 @@ export default function ApplyLoan() {
             <Form.Group className="mb-3">
               <Form.Label>Item Make</Form.Label>
               <Form.Control
+                required
                 type="text"
                 name="itemMake"
                 value={formData.itemMake}
                 onChange={handleInputChange}
               />
+              <Form.Control.Feedback type="invalid">
+                    Please enter the item make!
+                </Form.Control.Feedback>
             </Form.Group>
           </div>
         </div>
