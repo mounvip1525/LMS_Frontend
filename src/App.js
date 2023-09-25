@@ -12,6 +12,7 @@ import ApplyLoan from "./components/User/ApplyLoan";
 import ViewLoans from "./components/User/ViewLoans";
 import ItemsPurchased from "./components/User/ItemsPurchased";
 import { useAuth } from "./context/AuthContext";
+import About from "./components/About";
 
 const App = () => {
   const { user } = useAuth();
@@ -35,7 +36,8 @@ const App = () => {
           <Route path="/admin/item/add" element={(user && user.role === "Admin") ? <AddItem /> : <AdminLogin />} />
           <Route path="/admin/item/all" element={(user && user.role === "Admin") ? <ItemsMaster /> : <AdminLogin />} />
 
-          <Route path="/" element={(user && user.role === "User") ? <ApplyLoan/> : <UserLogin />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/" element={(user && user.role === "User") ? <ApplyLoan/> : <About />} />
         </Routes>
       </Router>
     </div>

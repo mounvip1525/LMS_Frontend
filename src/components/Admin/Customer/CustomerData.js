@@ -5,20 +5,19 @@ import "../../../styles/Form.css";
 import AdminSidebar from "../Sidebar";
 import { SERVER_URL } from "../../../config";
 import { Url } from "../../../Url";
-import { Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEdit,
-  faTrash,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function CustomerData() {
 
   const [customers, setCustomers] = useState([]);
   const [update, setUpdate] = useState(false);
-  const [alert,setAlert] = useState(false);
-  const [alertMessage,setAlertMessage] = useState("");
-  const [err,setErr] = useState(false);
+  const [alert, setAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [err, setErr] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -74,15 +73,14 @@ export default function CustomerData() {
         "Content-type": "application/json; charset=UTF-8",
       }
     })
-    .then((response) => {
-      if(response.ok)
-      {
-        setUpdate((bool) => !bool);
-        return response.text();
-      }
-    })
+      .then((response) => {
+        if (response.ok) {
+          setUpdate((bool) => !bool);
+          return response.text();
+        }
+      })
 
-    navigate("/admin/customer/add", {replace: true, state: customer});
+    navigate("/admin/customer/add", { replace: true, state: customer });
   };
 
   return (
@@ -99,7 +97,7 @@ export default function CustomerData() {
             {alertMessage}
           </div>
         )}
-        <Table responsive striped="columns" bordered size="sm" className="mb-3">
+        <table className="lms-table">
           <thead>
             <tr>
               <th>EID</th>
@@ -107,8 +105,8 @@ export default function CustomerData() {
               <th>Designation</th>
               <th>Department</th>
               <th>Gender</th>
-              <th>Date of Birth</th>
-              <th>Date of Joining</th>
+              <th>DOB</th>
+              <th>DOJ</th>
               <th></th>
             </tr>
           </thead>
@@ -124,13 +122,13 @@ export default function CustomerData() {
                 <td>{customer.dateOfJoining}</td>
                 <td>
                   <FontAwesomeIcon
-                    icon={faTrash}
+                    icon={faXmark}
                     className="hand-icon"
-                    style={{ marginRight: "4px" }}
+                    style={{ marginRight: "6px" }}
                     onClick={(e) => handleDelete(e, customer)}
                   />
-                  <FontAwesomeIcon 
-                    icon={faEdit} 
+                  <FontAwesomeIcon
+                    icon={faEdit}
                     className="hand-icon"
                     onClick={(e) => handleEdit(e, customer)}
                   />
@@ -138,7 +136,7 @@ export default function CustomerData() {
               </tr>
             ))}
           </tbody>
-        </Table>
+        </table>
       </div>
     </div>
   );

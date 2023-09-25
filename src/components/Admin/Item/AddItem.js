@@ -19,15 +19,14 @@ export default function AddItem() {
   });
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const [validated,setValidated] = useState(false);
+  const [validated, setValidated] = useState(false);
   const [err, setErr] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     const item = location.state;
 
-    if(item)
-    {
+    if (item) {
       setFormData({
         itemId: item.itemId,
         itemCategory: item.itemCategory,
@@ -37,10 +36,10 @@ export default function AddItem() {
         issueStatus: item.issueStatus
       })
     }
-  },[]);
+  }, []);
 
   const handleOnSubmit = async (event) => {
-    
+
     // event.preventDefault();
     // console.log(formData);
 
@@ -48,13 +47,12 @@ export default function AddItem() {
     setValidated(true);
 
     if (form.checkValidity() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-        console.log("in");
-        return;
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("in");
+      return;
     }
-    else
-    {
+    else {
       event.preventDefault();
       await fetch(SERVER_URL + Url.ADD_ITEM, {
         method: "POST",
@@ -77,21 +75,21 @@ export default function AddItem() {
             }, 5000);
           } else {
             setAlertMessage("Item was not added!");
-            setTimeout(() => {}, 100);
+            setTimeout(() => { }, 100);
             setAlert(true);
             setErr(true);
           }
         });
-        setFormData({
-          itemId: "",
-          itemCategory: "Electronics",
-          itemDescription: "",
-          itemMake: "",
-          itemValuation: "",
-          issueStatus: "Y"
-        });
+      setFormData({
+        itemId: "",
+        itemCategory: "Electronics",
+        itemDescription: "",
+        itemMake: "",
+        itemValuation: "",
+        issueStatus: "Y"
+      });
     }
-    
+
   };
 
   const handleInputChange = (e) => {
@@ -103,7 +101,7 @@ export default function AddItem() {
   };
   return (
     <div className="container ">
-      <AdminSidebar activeLink="addItem"/>
+      <AdminSidebar activeLink="addItem" />
       <div className="formBox">
         <h2 className="mb-0">Add Item</h2>
         <p style={{ color: "grey" }}>Add an item to the catalogue</p>
@@ -128,22 +126,22 @@ export default function AddItem() {
                   onChange={handleInputChange}
                 />
                 <Form.Control.Feedback type="invalid">
-                    Please enter a valid item ID!
+                  Please enter a valid item ID!
                 </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Item Category</Form.Label>
-                  <Form.Select
-                    aria-label="itemCategory"
-                    name="itemCategory"
-                    value={formData.itemCategory}
-                    onChange={handleInputChange}
-                  >
-                    <option value="Electronics">Electronics</option>
-                    <option value="Furniture">Furniture</option>
-                    <option value="Automobiles">Automobiles</option>
-                  </Form.Select>
+                <Form.Select
+                  aria-label="itemCategory"
+                  name="itemCategory"
+                  value={formData.itemCategory}
+                  onChange={handleInputChange}
+                >
+                  <option value="Electronics">Electronics</option>
+                  <option value="Furniture">Furniture</option>
+                  <option value="Automobiles">Automobiles</option>
+                </Form.Select>
               </Form.Group>
 
               <Form.Group className="mb-3">
@@ -154,9 +152,9 @@ export default function AddItem() {
                   name="itemDescription"
                   value={formData.itemDescription}
                   onChange={handleInputChange}
-                />  
+                />
                 <Form.Control.Feedback type="invalid">
-                    Please enter the item description!
+                  Please enter the item description!
                 </Form.Control.Feedback>
               </Form.Group>
 
@@ -168,9 +166,9 @@ export default function AddItem() {
                   name="itemMake"
                   value={formData.itemMake}
                   onChange={handleInputChange}
-                />  
+                />
                 <Form.Control.Feedback type="invalid">
-                    Please enter the item make!
+                  Please enter the item make!
                 </Form.Control.Feedback>
               </Form.Group>
 
@@ -187,21 +185,21 @@ export default function AddItem() {
                   onChange={handleInputChange}
                 />
                 <Form.Control.Feedback type="invalid">
-                    Please enter the item valuation!
+                  Please enter the item valuation!
                 </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Issue Status</Form.Label>
                 <Form.Select
-                    aria-label="issueStatus"
-                    name="issueStatus"
-                    value={formData.issueStatus}
-                    onChange={handleInputChange}
-                  >
-                    <option value="Y">Y</option>
-                    <option value="N">N</option>
-                  </Form.Select>
+                  aria-label="issueStatus"
+                  name="issueStatus"
+                  value={formData.issueStatus}
+                  onChange={handleInputChange}
+                >
+                  <option value="Y">Y</option>
+                  <option value="N">N</option>
+                </Form.Select>
               </Form.Group>
 
             </div>

@@ -5,7 +5,7 @@ import AdminSidebar from "../Sidebar";
 import { Form, Button } from "react-bootstrap";
 import { SERVER_URL } from "../../../config";
 import { Url } from "../../../Url";
-import {useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 export default function AddCustomer() {
@@ -20,7 +20,7 @@ export default function AddCustomer() {
   });
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const [validated,setValidated] = useState(false);
+  const [validated, setValidated] = useState(false);
   const [err, setErr] = useState(false);
   const location = useLocation();
 
@@ -28,8 +28,7 @@ export default function AddCustomer() {
   useEffect(() => {
     const customer = location.state;
 
-    if(customer)
-    {
+    if (customer) {
       setFormData({
         employeeId: customer.employeeId,
         employeeName: customer.employeeName,
@@ -40,14 +39,14 @@ export default function AddCustomer() {
         dateOfJoining: customer.dateOfJoining,
       })
     }
-  },[]);
+  }, []);
 
   const handleOnSubmit = async (event) => {
     // e.preventDefault();
     // console.log(formData);
 
     const form = event.currentTarget;
-        
+
     setValidated(true);
 
     if (form.checkValidity() === false) {
@@ -56,8 +55,7 @@ export default function AddCustomer() {
       console.log("in");
       return;
     }
-    else
-    {
+    else {
       event.preventDefault();
       await fetch(SERVER_URL + Url.ADD_CUSTOMER, {
         method: "POST",
@@ -80,21 +78,21 @@ export default function AddCustomer() {
             }, 5000);
           } else {
             setAlertMessage("Employee was NOT Added !!!!!!");
-            setTimeout(() => {}, 100);
+            setTimeout(() => { }, 100);
             setAlert(true);
             setValidated(false);
             setErr(true);
           }
         });
-        setFormData({
-          employeeId: "",
-          employeeName: "",
-          department: "Technology",
-          gender: "Other",
-          designation: "Associate",
-          dateOfBirth: "",
-          dateOfJoining: "",
-        });
+      setFormData({
+        employeeId: "",
+        employeeName: "",
+        department: "Technology",
+        gender: "Other",
+        designation: "Associate",
+        dateOfBirth: "",
+        dateOfJoining: "",
+      });
     }
   };
 
@@ -133,7 +131,7 @@ export default function AddCustomer() {
                   onChange={handleInputChange}
                 />
                 <Form.Control.Feedback type="invalid">
-                    Please enter a valid employee ID!
+                  Please enter a valid employee ID!
                 </Form.Control.Feedback>
               </Form.Group>
 
@@ -147,7 +145,7 @@ export default function AddCustomer() {
                   onChange={handleInputChange}
                 />
                 <Form.Control.Feedback type="invalid">
-                    Please enter an employee name!
+                  Please enter an employee name!
                 </Form.Control.Feedback>
               </Form.Group>
 

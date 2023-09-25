@@ -14,13 +14,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 
-export default function AdminSidebar({activeLink}) {
+export default function AdminSidebar({ activeLink }) {
   const navigate = useNavigate();
   const { logout, user } = useAuth();
 
   function onLogout() {
     logout();
-    navigate("/admin/login", {replace: true})
+    navigate("/admin/login", { replace: true })
   }
 
   return (
@@ -30,7 +30,6 @@ export default function AdminSidebar({activeLink}) {
           <FontAwesomeIcon icon={faUser} />
           Admin {user.name}
         </div>
-        <hr />
 
         <div className="sidebar-contents">
           <div>

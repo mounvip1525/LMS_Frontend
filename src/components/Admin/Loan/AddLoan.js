@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "../../../styles/Home.css";
 import "../../../styles/Form.css";
 import AdminSidebar from "../Sidebar";
@@ -15,7 +15,7 @@ export default function AddLoan() {
   });
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const [validated,setValidated] = useState(false);
+  const [validated, setValidated] = useState(false);
   const [err, setErr] = useState(false);
 
   const handleOnSubmit = async (event) => {
@@ -23,17 +23,16 @@ export default function AddLoan() {
     // console.log(formData);
 
     const form = event.currentTarget;
-        
+
     setValidated(true);
 
     if (form.checkValidity() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-        console.log("in");
-        return;
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("in");
+      return;
     }
-    else
-    {
+    else {
       event.preventDefault();
       await fetch(SERVER_URL + Url.ADD_LOANCARD, {
         method: "POST",
@@ -56,16 +55,16 @@ export default function AddLoan() {
             }, 5000);
           } else {
             setAlertMessage("Loan Card was not added!");
-            setTimeout(() => {}, 100);
+            setTimeout(() => { }, 100);
             setAlert(true);
             setErr(true);
           }
         });
-        setFormData({
-          loanId: "",
-          loanType: "Electronics",
-          loanDurationYrs: ""
-        });
+      setFormData({
+        loanId: "",
+        loanType: "Electronics",
+        loanDurationYrs: ""
+      });
     }
   };
 
@@ -79,7 +78,7 @@ export default function AddLoan() {
 
   return (
     <div className="container ">
-      <AdminSidebar activeLink="addLoan"/>
+      <AdminSidebar activeLink="addLoan" />
       <div className="formBox">
         <h2 className="mb-0">Add Loan Card</h2>
         <p style={{ color: "grey" }}>Add a Loan Card to the collection</p>
@@ -104,22 +103,22 @@ export default function AddLoan() {
                   onChange={handleInputChange}
                 />
                 <Form.Control.Feedback type="invalid">
-                    Please enter a valid loan ID!
+                  Please enter a valid loan ID!
                 </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Loan Type</Form.Label>
-                  <Form.Select
-                    aria-label="loanType"
-                    name="loanType"
-                    value={formData.loanType}
-                    onChange={handleInputChange}
-                  >
-                    <option value="Electronics">Electronics</option>
-                    <option value="Furniture">Furniture</option>
-                    <option value="Automobiles">Automobiles</option>
-                  </Form.Select>
+                <Form.Select
+                  aria-label="loanType"
+                  name="loanType"
+                  value={formData.loanType}
+                  onChange={handleInputChange}
+                >
+                  <option value="Electronics">Electronics</option>
+                  <option value="Furniture">Furniture</option>
+                  <option value="Automobiles">Automobiles</option>
+                </Form.Select>
               </Form.Group>
 
               <Form.Group className="mb-3">
@@ -130,9 +129,9 @@ export default function AddLoan() {
                   name="loanDurationYrs"
                   value={formData.loanDurationYrs}
                   onChange={handleInputChange}
-                />  
+                />
                 <Form.Control.Feedback type="invalid">
-                    Please enter the loan duration in years!
+                  Please enter the loan duration in years!
                 </Form.Control.Feedback>
               </Form.Group>
             </div>

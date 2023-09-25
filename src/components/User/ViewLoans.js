@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from "react";
-import { Table } from "react-bootstrap";
 import UserSidebar from "./Sidebar";
 import { Url } from "../../Url";
 import { SERVER_URL } from "../../config";
 import { useAuth } from "../../context/AuthContext";
-// Form and Home css
 
 export default function ViewLoans() {
   const [viewLoanCard, setViewLoanCard]= useState([]);
@@ -23,7 +21,7 @@ export default function ViewLoans() {
       <div className="formBox tableBox">
         <h2 className="mb-0">Loan Cards Availed</h2>
         <p style={{ color: "grey" }}>View your loan cards here</p>
-        <Table responsive striped="columns" bordered size="sm" className="mb-3">
+        <table className="lms-table">
           <thead>
             <tr>
               <th>Loan ID</th>
@@ -42,7 +40,7 @@ export default function ViewLoans() {
               </tr>
             ))}
           </tbody>
-        </Table>
+        </table>
       </div>
     </div>
   );

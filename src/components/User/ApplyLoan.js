@@ -21,28 +21,27 @@ export default function ApplyLoan() {
   const [err, setErr] = useState(false);
   const [itemCat, setItemCat] = useState([]);
   const [itemDesc, setItemDesc] = useState([]);
-  const [validated,setValidated] = useState(false);
+  const [validated, setValidated] = useState(false);
 
 
   useEffect(() => {
     fetch(SERVER_URL + Url.GET_ITEM_CATEGORIES)
-    .then((response) => response.json())
-    .then((data) => setItemCat(data))
-    .catch((err) => console.log("Error in fetching Item Categories " + err.message))
-  },[])
+      .then((response) => response.json())
+      .then((data) => setItemCat(data))
+      .catch((err) => console.log("Error in fetching Item Categories " + err.message))
+  }, [])
 
   const handleOnSubmit = async (e) => {
     const form = e.currentTarget;
     setValidated(true);
 
     if (form.checkValidity() === false) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log("in");
-        return;
+      e.preventDefault();
+      e.stopPropagation();
+      console.log("in");
+      return;
     }
-    else 
-    {
+    else {
       e.preventDefault();
       await fetch(SERVER_URL + Url.APPLY_LOAN, {
         method: "POST",
@@ -60,24 +59,24 @@ export default function ApplyLoan() {
           if (data != null) {
             setAlertMessage(data);
             setAlert(true);
-          
+
             setTimeout(() => {
               setAlert(false);
             }, 5000);
           } else {
             setAlertMessage("Unable to apply for loan");
-            setTimeout(() => {}, 100);
+            setTimeout(() => { }, 100);
             setAlert(true);
             setErr(true);
           }
         });
-        setFormData({
-          employeeId: user.empId,
-          itemCategory: "",
-          itemDescription: "",
-          itemValue: "",
-          itemMake: ""
-        });
+      setFormData({
+        employeeId: user.empId,
+        itemCategory: "",
+        itemDescription: "",
+        itemValue: "",
+        itemMake: ""
+      });
     }
   };
 
@@ -85,10 +84,10 @@ export default function ApplyLoan() {
     const { name, value } = e.target;
 
     if (name === "itemCategory") {
-      fetch(SERVER_URL+Url.GET_ITEM_DESCRIPTION+"?itemCat="+value)
-      .then((response) => response.json())
-      .then((data) => setItemDesc(data))
-      .catch((err) => console.log("Error in fetching Item Description " + err.message))
+      fetch(SERVER_URL + Url.GET_ITEM_DESCRIPTION + "?itemCat=" + value)
+        .then((response) => response.json())
+        .then((data) => setItemDesc(data))
+        .catch((err) => console.log("Error in fetching Item Description " + err.message))
     }
 
     setFormData({
@@ -102,102 +101,102 @@ export default function ApplyLoan() {
     <div className="container ">
       <UserSidebar activeLink="applyLoan" />
       <div className="formBox">
-      <h2 className="mb-0">Apply Loan</h2>
-      <p style={{ color: "grey" }}>Apply for a Loan</p>
-      {alert && (
-        <div
-          className={err ? "alert alert-danger" : "alert alert-success"}
-          role="alert"
-        >
-          {alertMessage}
-        </div>
-      )}
-      <Form noValidate validated={validated} onSubmit={(e) => handleOnSubmit(e)}>
-        <div>
+        <h2 className="mb-0">Apply Loan</h2>
+        <p style={{ color: "grey" }}>Apply for a Loan</p>
+        {alert && (
+          <div
+            className={err ? "alert alert-danger" : "alert alert-success"}
+            role="alert"
+          >
+            {alertMessage}
+          </div>
+        )}
+        <Form noValidate validated={validated} onSubmit={(e) => handleOnSubmit(e)}>
           <div>
-            <Form.Group className="mb-3">
-              <Form.Label>Employee ID</Form.Label>
-              <Form.Control
-                type="text"
-                name="employeeId"
-                value={formData.employeeId}
-                // onChange={handleInputChange}
-                readOnly
-                disabled
-              />
-            </Form.Group>
+            <div>
+              <Form.Group className="mb-3">
+                <Form.Label>Employee ID</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="employeeId"
+                  value={formData.employeeId}
+                  // onChange={handleInputChange}
+                  readOnly
+                  disabled
+                />
+              </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Item Category</Form.Label>
-              <Form.Select
-                aria-label="itemCategory"
-                name="itemCategory"
-                value={formData.itemCategory}
-                onChange={handleInputChange}
-              >
-                <option>Select Item Category</option>
-                {
-                  itemCat.map((data) => (
-                    <option value={data}>{data}</option>
-                  ))
-                }
-                {/* <option value="Electronics">Electronics</option>
+              <Form.Group className="mb-3">
+                <Form.Label>Item Category</Form.Label>
+                <Form.Select
+                  aria-label="itemCategory"
+                  name="itemCategory"
+                  value={formData.itemCategory}
+                  onChange={handleInputChange}
+                >
+                  <option>Select Item Category</option>
+                  {
+                    itemCat.map((data) => (
+                      <option value={data}>{data}</option>
+                    ))
+                  }
+                  {/* <option value="Electronics">Electronics</option>
                 <option value="Furniture">Furniture</option>
                 <option value="Automobiles">Automobiles</option> */}
-              </Form.Select>
-            </Form.Group>
+                </Form.Select>
+              </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Item Description</Form.Label>
-              <Form.Select
-                aria-label="itemDescription"
-                name="itemDescription"
-                value={formData.itemDescription}
-                onChange={handleInputChange}
-              >
-              <option>Select Item Description</option>
-              {
-                itemDesc.map((data) => (
-                  <option value={data}>{data}</option>
-                ))
-              }
-              </Form.Select>
-            </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Item Description</Form.Label>
+                <Form.Select
+                  aria-label="itemDescription"
+                  name="itemDescription"
+                  value={formData.itemDescription}
+                  onChange={handleInputChange}
+                >
+                  <option>Select Item Description</option>
+                  {
+                    itemDesc.map((data) => (
+                      <option value={data}>{data}</option>
+                    ))
+                  }
+                </Form.Select>
+              </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Item Value</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                name="itemValue"
-                value={formData.itemValue}
-                onChange={handleInputChange}
-              />
-              <Form.Control.Feedback type="invalid">
-                    Please enter the item valuation!
+              <Form.Group className="mb-3">
+                <Form.Label>Item Value</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="itemValue"
+                  value={formData.itemValue}
+                  onChange={handleInputChange}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please enter the item valuation!
                 </Form.Control.Feedback>
-            </Form.Group>
+              </Form.Group>
+            </div>
+
+            <div>
+              <Form.Group className="mb-3">
+                <Form.Label>Item Make</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="itemMake"
+                  value={formData.itemMake}
+                  onChange={handleInputChange}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please enter the item make!
+                </Form.Control.Feedback>
+              </Form.Group>
+            </div>
           </div>
 
-          <div>
-            <Form.Group className="mb-3">
-              <Form.Label>Item Make</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                name="itemMake"
-                value={formData.itemMake}
-                onChange={handleInputChange}
-              />
-              <Form.Control.Feedback type="invalid">
-                    Please enter the item make!
-                </Form.Control.Feedback>
-            </Form.Group>
-          </div>
-        </div>
-
-        <Button type="submit">Apply</Button>
-      </Form>
+          <Button type="submit">Apply</Button>
+        </Form>
       </div>
     </div>
   );

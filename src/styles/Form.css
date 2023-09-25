@@ -6,6 +6,7 @@
 }
 .tableBox{
     padding:4% 10px;
+    overflow: auto;
 }
 .tableBox h2, .tableBox p{
     padding-left:5%;

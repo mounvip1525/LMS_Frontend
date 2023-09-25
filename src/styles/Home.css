@@ -1,7 +1,6 @@
 .sidebar{
     width:25%;
     height:100%;
-    /* border-right:0.25px solid grey; */
     display:flex;
     justify-content: center;
     align-items: center;
@@ -76,7 +75,31 @@
 .highlight a{
     color:#055f83 !important;
 }
-
 .hand-icon:hover {
     cursor: pointer
 }
+.lms-table td, .lms-table th {
+    padding:5px 10px;
+}
+.lms-table div{
+    float:right;
+}
+.lms-table {
+    width: 90%;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    margin-left:5%;
+}
+.lms-table tr:nth-child(even) {
+    background-color: #ebf4f8;
+}
+.lms-table th{
+    background:#6fbbd9;
+}
+.lms-table span{
+    margin-right:5%;
+    padding:0;
+    text-decoration: underline;
+    color:#055f83;
+}
+

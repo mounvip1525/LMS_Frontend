@@ -1,35 +1,33 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "../../../styles/Home.css";
 import "../../../styles/Form.css";
 import AdminSidebar from "../Sidebar";
 import { SERVER_URL } from "../../../config";
 import { Url } from "../../../Url";
-import { Table, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faDeleteLeft,
   faEdit,
-  faTrash,
+  faXmark
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function LoanData() {
 
   const [loancards, setLoancards] = useState([]);
 
-  useEffect (() => {
+  useEffect(() => {
     fetch(SERVER_URL + Url.GET_LOANCARDS)
-    .then((response) => response.json())
-    .then((loancardsData) => setLoancards(loancardsData))
-    .catch((err) => console.log("Error in fetching loan cards! " + err.message))
-    }, []);
+      .then((response) => response.json())
+      .then((loancardsData) => setLoancards(loancardsData))
+      .catch((err) => console.log("Error in fetching loan cards! " + err.message))
+  }, []);
 
   return (
     <div className="container ">
-      <AdminSidebar activeLink="allLoans"/>
+      <AdminSidebar activeLink="allLoans" />
       <div className="formBox tableBox">
         <h2 className="mb-0">Loan Cards Data</h2>
         <p style={{ color: "grey" }}>View, edit and delete loan cards here</p>
-        <Table responsive striped="columns" bordered size="sm" className="mb-3">
+        <table className="lms-table">
           <thead>
             <tr>
               <th>Loan_ID</th>
@@ -46,15 +44,15 @@ export default function LoanData() {
                 <td>{loancard.loanDurationYrs}</td>
                 <td>
                   <FontAwesomeIcon
-                    icon={faTrash}
-                    style={{ marginRight: "4px" }}
+                    icon={faXmark}
+                    style={{ marginRight: "6px" }}
                   />
                   <FontAwesomeIcon icon={faEdit} />
                 </td>
               </tr>
             ))}
           </tbody>
-        </Table>
+        </table>
       </div>
     </div>
   );
