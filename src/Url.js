@@ -12,5 +12,6 @@ export const Url = {
     GET_ITEMS_PURCHASED: "/user/getEmplIssues",
     GET_EMP_LOANCARD: "/user/getEmployeeCard",
     GET_ITEM_CATEGORIES: "/user/getItemCat",
-    GET_ITEM_DESCRIPTION: "/user/getItemDesc"
+    GET_ITEM_DESCRIPTION: "/user/getItemDesc",
+    DELETE_LOAN_CARD: "/admin/deleteLoanCard"
 }
