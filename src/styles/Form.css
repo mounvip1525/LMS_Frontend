@@ -3,6 +3,7 @@
     text-align:left;
     height:100%;
     padding:4% 5%;
+    overflow: auto;
 }
 .tableBox{
     padding:4% 10px;

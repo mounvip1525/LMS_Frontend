@@ -96,6 +96,9 @@
 .lms-table th{
     background:#6fbbd9;
 }
+.lms-table td{
+    font-size:small;
+}
 .lms-table span{
     margin-right:5%;
     padding:0;

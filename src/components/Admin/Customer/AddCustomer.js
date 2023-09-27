@@ -43,19 +43,19 @@ export default function AddCustomer() {
 
   const handleOnSubmit = async (event) => {
     // e.preventDefault();
-    // console.log(formData);
+    console.log(1);
 
     const form = event.currentTarget;
 
-    setValidated(true);
-
     if (form.checkValidity() === false) {
+      setValidated(true);
       event.preventDefault();
       event.stopPropagation();
       console.log("in");
       return;
     }
     else {
+      
       event.preventDefault();
       await fetch(SERVER_URL + Url.ADD_CUSTOMER, {
         method: "POST",
@@ -203,6 +203,7 @@ export default function AddCustomer() {
                   name="dateOfBirth"
                   value={formData.dateOfBirth}
                   onChange={handleInputChange}
+                  required
                 />
               </Form.Group>
 
@@ -214,6 +215,7 @@ export default function AddCustomer() {
                   name="dateOfJoining"
                   value={formData.dateOfJoining}
                   onChange={handleInputChange}
+                  required
                 />
               </Form.Group>
             </div>

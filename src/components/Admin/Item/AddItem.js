@@ -44,9 +44,10 @@ export default function AddItem() {
     // console.log(formData);
 
     const form = event.currentTarget;
-    setValidated(true);
+    
 
     if (form.checkValidity() === false) {
+      setValidated(true);
       event.preventDefault();
       event.stopPropagation();
       console.log("in");

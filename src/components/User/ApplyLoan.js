@@ -33,9 +33,10 @@ export default function ApplyLoan() {
 
   const handleOnSubmit = async (e) => {
     const form = e.currentTarget;
-    setValidated(true);
+    
 
     if (form.checkValidity() === false) {
+      setValidated(true);
       e.preventDefault();
       e.stopPropagation();
       console.log("in");

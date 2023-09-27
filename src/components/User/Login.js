@@ -18,8 +18,9 @@ export default function UserLogin() {
 
     const onSubmitLogin = async (event) => {
         const form = event.currentTarget;
-        setValidated(true);
+        
         if (form.checkValidity() === false) {
+            setValidated(true);
             event.preventDefault();
             event.stopPropagation();
         } else {
