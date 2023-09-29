@@ -79,6 +79,7 @@ export default function AddLoan() {
         loanDurationYrs: ""
       });
     }
+    setValidated(false);
   };
 
   const handleInputChange = (e) => {

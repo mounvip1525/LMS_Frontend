@@ -55,7 +55,7 @@ export default function AddCustomer() {
       return;
     }
     else {
-      
+
       event.preventDefault();
       await fetch(SERVER_URL + Url.ADD_CUSTOMER, {
         method: "POST",
@@ -94,6 +94,8 @@ export default function AddCustomer() {
         dateOfJoining: "",
       });
     }
+    setValidated(false);
+
   };
 
   const handleInputChange = (e) => {

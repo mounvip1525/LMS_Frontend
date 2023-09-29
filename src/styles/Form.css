@@ -26,3 +26,11 @@
     float:right;
     width:30%;
 }
+@media screen and (max-width: 820px) {
+    .formBox form >div{
+        flex-direction: column;
+    }
+    .formBox form>div div{
+        width:100%;
+    }
+  }

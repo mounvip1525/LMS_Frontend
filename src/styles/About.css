@@ -53,6 +53,10 @@ hr{
     right:2%;
     display:flex;
 }
-.about-container nav a{
+.about-container nav button{
     margin-right:8%;
+    min-width:70px;
+}
+.about-container nav a{
+    color:white;
 }

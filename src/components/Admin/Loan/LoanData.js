@@ -100,14 +100,14 @@ export default function LoanData() {
         <table className="lms-table">
           <thead>
             <tr>
-              <th>Loan_ID</th>
-              <th>Loan_Duration_In_Years</th>
-              <th>Loan_Type</th>
+              <th>Loan ID</th>
+              <th>Loan Type</th>
+              <th>Loan Duration(in yrs)</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {loancards && loancards.map((loancard) => (
+            {loancards.length > 0 ? loancards.map((loancard) => (
               <tr>
                 <td>{loancard.loanId}</td>
                 <td>{loancard.loanType}</td>
@@ -119,13 +119,13 @@ export default function LoanData() {
                     className="hand-icon"
                     onClick={(e) => handleDelete(e, loancard)}
                   />
-                  <FontAwesomeIcon icon={faEdit} 
+                  <FontAwesomeIcon icon={faEdit}
                     className="hand-icon"
                     onClick={(e) => handleEdit(e, loancard)}
                   />
                 </td>
               </tr>
-            ))}
+            )) : <p>No Data Available</p>}
           </tbody>
         </table>
       </div>

@@ -105,4 +105,24 @@
     text-decoration: underline;
     color:#055f83;
 }
+@media screen and (max-width: 500px) {
+    .profile-box svg, .sidebar-contents div svg{
+        display:none;
+    }
+    .sidebar{
+            width: 100%;
+    }
+    .sidebar>div{
+        width:auto;
+    }
+    .sidebar-contents{
+        display:flex;
+    }
+    .sidebar-contents div>p{
+        display:none;
+    }
+    .sidebar-contents div div{
+        display:flex;
+    }
+}
 

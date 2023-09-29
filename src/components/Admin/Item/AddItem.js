@@ -44,7 +44,7 @@ export default function AddItem() {
     // console.log(formData);
 
     const form = event.currentTarget;
-    
+
 
     if (form.checkValidity() === false) {
       setValidated(true);
@@ -90,6 +90,7 @@ export default function AddItem() {
         issueStatus: "Y"
       });
     }
+    setValidated(false);
 
   };
 

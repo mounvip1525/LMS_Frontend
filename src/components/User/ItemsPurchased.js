@@ -31,7 +31,7 @@ export default function ItemsPurchased() {
             </tr>
           </thead>
           <tbody>
-            {itemsPurchased && itemsPurchased.map((itemsPurchased) => (
+            {itemsPurchased.length > 0 ? itemsPurchased.map((itemsPurchased) => (
               <tr>
                 <td>{itemsPurchased.issueId}</td>
                 <td>{itemsPurchased.item.itemDescription}</td>
@@ -39,7 +39,7 @@ export default function ItemsPurchased() {
                 <td>{itemsPurchased.item.itemCategory}</td>
                 <td>{itemsPurchased.item.itemValuation}</td>
               </tr>
-            ))}
+            )) : <p>No Data Available</p>}
           </tbody>
         </table>
       </div>

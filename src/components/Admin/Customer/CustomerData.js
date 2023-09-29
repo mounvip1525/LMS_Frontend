@@ -111,7 +111,7 @@ export default function CustomerData() {
             </tr>
           </thead>
           <tbody>
-            {customers && customers.map((customer) => (
+            {customers.length>0 ? customers.map((customer) => (
               <tr>
                 <td>{customer.employeeId}</td>
                 <td>{customer.employeeName}</td>
@@ -134,7 +134,7 @@ export default function CustomerData() {
                   />
                 </td>
               </tr>
-            ))}
+            )) : <p>No Data Available</p>}
           </tbody>
         </table>
       </div>

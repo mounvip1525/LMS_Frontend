@@ -100,17 +100,17 @@ export default function ItemsMaster() {
         <table className="lms-table">
           <thead>
             <tr>
-              <th>Item_ID</th>
-              <th>Issue_Status</th>
-              <th>Item_Category</th>
-              <th>Item_Description</th>
-              <th>Item_Make</th>
-              <th>Item_Valuation</th>
+              <th>Item ID</th>
+              <th>Issue Status</th>
+              <th>Item Category</th>
+              <th>Item Description</th>
+              <th>Item Make</th>
+              <th>Item Valuation</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {items && items.map((item) => (
+            {items.length > 0 ? items.map((item) => (
               <tr>
                 <td>{item.itemId}</td>
                 <td>{item.issueStatus}</td>
@@ -133,7 +133,7 @@ export default function ItemsMaster() {
                   />
                 </td>
               </tr>
-            ))}
+            )) : <p>No Data Available</p>}
           </tbody>
         </table>
       </div>
