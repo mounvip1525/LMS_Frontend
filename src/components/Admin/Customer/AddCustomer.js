@@ -123,7 +123,7 @@ export default function AddCustomer() {
         <Form noValidate validated={validated} onSubmit={(e) => handleOnSubmit(e)}>
           <div>
             <div>
-              <Form.Group className="mb-3">
+              {/* <Form.Group className="mb-3">
                 <Form.Label>Employee ID</Form.Label>
                 <Form.Control
                   required
@@ -135,7 +135,7 @@ export default function AddCustomer() {
                 <Form.Control.Feedback type="invalid">
                   Please enter a valid employee ID!
                 </Form.Control.Feedback>
-              </Form.Group>
+              </Form.Group> */}
 
               <Form.Group className="mb-3">
                 <Form.Label>Employee Name</Form.Label>
