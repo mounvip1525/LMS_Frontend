@@ -57,7 +57,7 @@ export default function UserLogin() {
     return (
         <div className='container'>
             <div className='img-box'>
-                <h1>&lt; / &gt; LUMA Loans</h1>
+                <h1>&lt; / &gt; Lenders & Co.</h1>
                 <img src={loginLogo} alt="login" />
             </div>
             <div className='login-box'>
